@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\Software Engineering\Code\SEAL Study\Sealtest\build\CMakeFiles\c59220b2e51680a6fb63a5ee9959b044\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A9411A0E-063D-3C81-9702-D6EDEFD0AF82}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
