@@ -140,6 +140,27 @@ void example_batch_encoder() {
     查看剩余噪音预算
     */
     cout << "    + Noise budget in result: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits" << endl;
+    /*
+    我们将加密的 数据进行解密并解码并验证结果
+    */
+    Plaintext plain_result;
+    print_line(__LINE__);
+    cout << "Decrypt and decode result." << endl;
+    decryptor.decrypt(encrypted_matrix, plain_result);
+
+    batch_encoder.decode(plain_result, pod_result);
+    
+    cout << "    + Result plaintext matrix ...... Correct." << endl;
+    print_matrix(pod_result, row_size);
+    /*
+    当所需的加密计算高度可并行化时，批处理允许我们有效地使用全明文多项式。
+    但是，它并没有解决这个文件开头提到的另一个问题:
+    每个槽只包含一个整数模的明文模量，除非明文模量非常大，
+    否则我们可以很快遇到数据类型溢出，并在需要整数计算时会得到意外的结果。
+    注意，溢出并不能以加密的形式检测到。CKKS方案(以及CKKSEncoder)解决了数据类型溢出问题，
+    但代价是只产生近似的结果。
+    
+    */
 
 }
 void example_ckks_encoder() {
