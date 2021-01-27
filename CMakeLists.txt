@@ -29,8 +29,9 @@ if(SEAL_BUILD_EXAMPLES)
         PRIVATE
         	${CMAKE_CURRENT_LIST_DIR}/examples.h
             ${CMAKE_CURRENT_LIST_DIR}/sealtest.cpp
-            ${CMAKE_CURRENT_LIST_DIR}/encoder.cpp
-            ${CMAKE_CURRENT_LIST_DIR}/bfv_Basics.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/1_bfv_Basics.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/2_encoder.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/3_levels.cpp
     )
 
 # target_link_libraries(<Your Project Name> PRIVATE SEAL::seal)

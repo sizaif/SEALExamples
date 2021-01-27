@@ -1,5 +1,6 @@
 #include "examples.h"
 
+
 using namespace std;
 using namespace seal;
 
@@ -164,6 +165,99 @@ void example_batch_encoder() {
 
 }
 void example_ckks_encoder() {
+    print_example_banner("Example: Encoders / CKKS Encoder");
+
+    EncryptionParameters parms(scheme_type::ckks);// 使用ckks
+    size_t poly_modulus_degree = 8192;
+    parms.set_poly_modulus_degree(poly_modulus_degree);
+    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 40, 40, 40, 40, 40 }));// 产生5个40位的素数的数组
+    
+    // 同BFV一致，声明
+    SEALContext context(parms);
+    print_parameters(context);
+    cout << endl;
+
+    // 密钥产生的方式和 bfv 是一样的
+    KeyGenerator keygen(context);
+    auto secret_key = keygen.secret_key();
+    PublicKey public_key;
+    keygen.create_public_key(public_key);
+    RelinKeys relin_keys;
+    keygen.create_relin_keys(relin_keys);
+
+    // 加密器，解密器，计算器
+    Encryptor encryptor(context, public_key);
+    Evaluator evaluator(context);
+    Decryptor decryptor(context, secret_key);
+
+    /*
+    * 要创建CKKS纯文本，我们需要一个特殊的编码器: 
+       BatchEncoder不适用于CKKS
+       CKKSEncoder 的方式是将实数或复数的向量编码为Plaintext objects 然后对object就可以加密了
+    看起来很像BatchEncoder为BFV方案所做的，但理论上它的背后是完全不同的。
+    */
+    CKKSEncoder encoder(context);
+
+    /*
+    * CKKS 中 slot数目  =  poly_modulus_degree / 2  每个slot编码为一个实数或复数。
+    * 而在BFV中 slot = poly_modulus_degree 并且被处理成 一个2X(N/2)的矩阵
+    */
+    size_t slot_count = encoder.slot_count();
+    cout << "Number of slots: " << slot_count << endl;
+
+
+    vector<double> input{ 0.0, 1.1, 2.2, 3.3 };
+    cout << "Input vector: " << endl;
+    print_vector(input);
+    /*
+    * 现在我们用CKKSEncoder进行编码。输入的浮点系数将通过参数“scale”放大
+    * 这是必要的，因为即使是在纯文本元素的CKKS方案,基本上是多项式整数系数。
+    * 在CKKS中，消息是存 MOD coeff_modulus,(而在BFV中是 存储 MOD plain_modulus)
+    * 因此，缩放后的消息不能太接近总大小coeff_modulus。
+    * 
+    */
+    Plaintext plain;
+    double scale = pow(2.0, 30);
+    print_line(__LINE__);
+    cout << "Encode input vector. and the size of scale: "<< scale << endl;
+    encoder.encode(input, scale, plain); // 将vector 按照scale定义的编码精度的尺度参数 编码成 Plaintext
+
+    /*
+    我们可以立即解码以检查编码的正确性。
+    */
+    vector<double> output;
+    cout << "    + Decode input vector ...... Correct." << endl;
+    encoder.decode(plain, output); // 解码
+    print_vector(output);
+
+    /*
+    The vector is encrypted the same was as in BFV.
+    简单样例:
+        将输入的 vector 加密后 求平方 并 序列化
+    */
+    Ciphertext encrypted;
+    print_line(__LINE__);
+    cout << "Encrypt input vector, square, and relinearize." << endl;
+
+    encryptor.encrypt(plain, encrypted); // 加密 Plaintext -> Ciphertext
+    // 计算
+    evaluator.square_inplace(encrypted); // encrypted = encrypted * encrypted
+
+    evaluator.relinearize_inplace(encrypted, relin_keys); // 序列化
+
+    cout << "    + Scale in squared input: " << encrypted.scale() << " (" << log2(encrypted.scale()) << " bits)"
+        << endl;
+
+    print_line(__LINE__);
+    cout << "Decrypt and decode." << endl;
+    decryptor.decrypt(encrypted, plain); // 解密
+    encoder.decode(plain, output); // 解码
+    cout << "    + Result vector ...... Correct." << endl;
+    print_vector(output); // 结果
+    /*
+    * CKKS方案允许减少加密计算之间的规模。这是CKKS非常强大和关键的基本特性灵活。
+    * 我们将在' 3_levels中详细讨论它。cpp'和稍后“4 _ckks_basics.cpp”。
+    */
 
 }
 void example_encoders()

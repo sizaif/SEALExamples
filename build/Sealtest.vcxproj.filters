@@ -4,10 +4,13 @@
     <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\sealtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\encoder.cpp">
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\1_bfv_Basics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\bfv_Basics.cpp">
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\2_encoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\3_levels.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
