@@ -322,6 +322,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\1_bfv_Basics.cpp" />
     <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\2_encoder.cpp" />
     <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\3_levels.cpp" />
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\demotest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="E:\Software Engineering\Code\SEAL Study\Sealtest\build\ZERO_CHECK.vcxproj">

@@ -32,6 +32,7 @@ if(SEAL_BUILD_EXAMPLES)
             ${CMAKE_CURRENT_LIST_DIR}/1_bfv_Basics.cpp
             ${CMAKE_CURRENT_LIST_DIR}/2_encoder.cpp
             ${CMAKE_CURRENT_LIST_DIR}/3_levels.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/demotest.cpp
     )
 
 # target_link_libraries(<Your Project Name> PRIVATE SEAL::seal)
