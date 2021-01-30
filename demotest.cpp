@@ -38,35 +38,38 @@ void create_database(size_t slot_count) {
 vector<double> get_input(size_t slot_count) {
    
   
-    vector<double> input;
-    input.reserve(slot_count); // 申请空间
+    vector<double> input(slot_count, 0ULL);
+    //input.reserve(slot_count); // 申请空间
 
     ifstream in("input.txt", ios::in);
     if (in.is_open()) {
         string str;
-
+        auto it = input.begin();
         while (getline(in, str)) {
             stringstream input_txt(str);
             string str_result;
             while (input_txt >> str_result) {
-                input.push_back(atof(str_result.c_str())); // string -> double;
+                (*it) = atof(str_result.c_str());
+                it++;
+                //input.push_back(atof(str_result.c_str())); // string -> double;
+                
             }
         }
         in.close();
     }
     print_line(__LINE__);
-    cout << " V: " << endl;
-    print_vector(input, 3, 7);
+    cout << " input of V: " << endl;
+    print_vector(input, 5, 7); // 前5 后5 项
     print_line(__LINE__);
 
     
     return input;
 }
 
-vector<vector<double>> get_database() {
+vector<vector<double>> get_database(size_t slot_count) {
 
     vector<vector<double>> E_matrix;
-    vector<double> input;
+    
     
 
     ifstream in("database.txt", ios::in);
@@ -76,29 +79,25 @@ vector<vector<double>> get_database() {
         while (getline(in, str)) {
             stringstream input_txt(str);
             string str_result;
-            input.clear();
+            vector<double> input(slot_count,0ULL);
+            auto it = input.begin();
             while (input_txt >> str_result) {
-                input.push_back(atof(str_result.c_str())); // string -> double;
+                (*it) = atof(str_result.c_str());
+                it++;
+                //input.push_back(atof(str_result.c_str())); // string -> double;
             }
             E_matrix.push_back(input);
         }
         in.close();
     }
-    vector<vector<double>>::iterator it;
-    int c = 0;
-    cout << endl;
-    /*
+    
+    print_line(__LINE__);
+    cout << "i.e. database of E: " << endl;
     // 输出测试
-    for ( it = E_matrix.begin(); it != E_matrix.end(); ++it) {
-        for (auto i = 0; i < (*it).size(); ++i) {
-            cout << (*it)[i] << "\t";
-        }
-        cout << endl;
-        ++c;
-        if (c == 3)
-            break;
-    }
-    */
+    print_vector(E_matrix[0], 5, 7);
+    print_vector(E_matrix[1], 5, 7);
+    print_vector(E_matrix[2], 5, 7);
+
     return E_matrix;
 }
 void test1() {
@@ -144,7 +143,7 @@ void test1() {
     double step_size = 1.0 / (static_cast<double>(slot_count) - 1); // 
     //create_database(slot_count);
     vector<double> v_input = get_input(slot_count);
-    vector<vector<double>> E_matrix = get_database();
+    vector<vector<double>> E_matrix = get_database(slot_count);
     /*
     // 写入input
     ofstream out;
