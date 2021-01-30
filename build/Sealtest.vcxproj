@@ -319,6 +319,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClInclude Include="E:\Software Engineering\Code\SEAL Study\Sealtest\examples.h" />
     <ClCompile Include="4_ckks_basics.cpp" />
+    <ClCompile Include="5-rotation.cpp" />
     <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\sealtest.cpp" />
     <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\1_bfv_Basics.cpp" />
     <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\2_encoder.cpp" />

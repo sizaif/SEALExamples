@@ -19,6 +19,9 @@
     <ClCompile Include="4_ckks_basics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="5-rotation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="E:\Software Engineering\Code\SEAL Study\Sealtest\examples.h">
