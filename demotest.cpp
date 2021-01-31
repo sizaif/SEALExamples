@@ -169,9 +169,7 @@ void test1() {
     Ciphertext probe_p;
     // 加密
     encryptor.encrypt(v_plaintext, probe_p); 
-    
-
-
+   
 
     
 
