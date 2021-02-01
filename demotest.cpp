@@ -94,12 +94,28 @@ vector<vector<double>> get_database(size_t slot_count) {
     print_line(__LINE__);
     cout << "i.e. database of E: " << endl;
     // 输出测试
-    print_vector(E_matrix[0], 5, 7);
-    print_vector(E_matrix[1], 5, 7);
-    print_vector(E_matrix[2], 5, 7);
+    for(int i = 0 ; i< 10 ; i++)
+        print_vector(E_matrix[i], 5, 7);
+    print_line(__LINE__);
 
     return E_matrix;
 }
+
+
+void Calculate_dist(SEALContext context,Ciphertext probe_p,vector<Ciphertext>encrypt_E_matrix) {
+
+
+    Evaluator evaluator(context);
+    
+    for (auto it = encrypt_E_matrix.begin(); it != encrypt_E_matrix.end(); it++) {
+        Plaintext plain_sub_cache;
+        Ciphertext encrypt_sub_cache;
+        evaluator.sub(probe_p, (*it), encrypt_sub_cache);
+        
+    }
+    
+}
+
 void test1() {
 
     EncryptionParameters parms(scheme_type::ckks);
@@ -162,7 +178,9 @@ void test1() {
     }
     */
     
-
+    /*
+    * 加密获得probe_p;
+    */
     Plaintext v_plaintext;
     // v编码
     ckks_encoder.encode(v_input, scale, v_plaintext); 
@@ -170,8 +188,46 @@ void test1() {
     // 加密
     encryptor.encrypt(v_plaintext, probe_p); 
    
+    /*
+    * 加密 获得 enceypt_E_matrix
+    */ 
+    vector<Ciphertext> encrypt_E_matrix;
+    for (auto it = E_matrix.begin(); it != E_matrix.end(); it++) {
+        Plaintext plain_E_ci;
+        Ciphertext encrypt_E_ci;
+        ckks_encoder.encode(*it, scale, plain_E_ci);
+        encryptor.encrypt(plain_E_ci, encrypt_E_ci);
+        encrypt_E_matrix.push_back(encrypt_E_ci);
+    }
 
+    /*
+    * 解码测试
+    */
+    print_line(__LINE__);
+    int ci = 0;
+    cout << "encode encrtpy and decrypt deocde test : " << endl;
+    for (auto it = encrypt_E_matrix.begin(); it != encrypt_E_matrix.end(); it++) {
+        Plaintext plain_E_ci;
+        Ciphertext encrypt_E_ci;
+        decryptor.decrypt((*it),plain_E_ci);
+        vector<double>result;
+        ckks_encoder.decode(plain_E_ci,result);
+        print_vector(result, 5, 7);
+        ci++;
+        if (ci > 3)
+            break;
+    }
     
-
+    print_line(__LINE__);
+    cout << "sub: " << endl;
+    for (auto it = encrypt_E_matrix.begin(); it != encrypt_E_matrix.end(); it++) {
+        Plaintext plain_sub_cache;
+        Ciphertext encrypt_sub_cache;
+        evaluator.sub(probe_p, (*it), encrypt_sub_cache);
+        decryptor.decrypt(encrypt_sub_cache, plain_sub_cache);
+        vector<double>result_cache;
+        ckks_encoder.decode(plain_sub_cache,result_cache);
+        print_vector(result_cache,5,7);
+    }
     return;
 }
