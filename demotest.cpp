@@ -549,7 +549,31 @@ void test1() {
     vector<double>result_add_cache;
     decryptor.decrypt(mapping_R, plain_add_cache);
     ckks_encoder.decode(plain_add_cache, result_add_cache);
+    print_line(__LINE__);
     cout << " mapping of R result " << endl;
     print_vector(result_add_cache, 5, 13);
+    
+    /*
+    Ciphertext encrypt_T,encrypt_d;
+    evaluator.sub(mapping_R,encrypt_T,encrypt_d);
+    
+    Plaintext plain_dd_cache;
+    vector<double>result_dd_cache;
+    decryptor.decrypt(encrypt_d, plain_dd_cache);
+    ckks_encoder.decode(plain_dd_cache, result_dd_cache);
+    bool ok = 0;
+    auto len = result_dd_cache.size();
+    for (auto i = 0; i < len; i++) {
+        if (result_dd_cache[i] > 0) {
+            ok = 1;
+            break;
+        }
+    }
+    string ans = ok ? "accept" : "reject";
+    cout << ans << endl;
+
+    */
+
+
     return;
 }
