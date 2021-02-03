@@ -434,9 +434,6 @@ Ciphertext get_combined_R(SEALContext& context,CKKSEncoder& ckks_encoder,Evaluat
     print_line(__LINE__);
     cout << "------get_combined_R() begin------" << endl;
 
-    vector<double>vector_R_result(ckks_encoder.slot_count(), 0ULL);
-
-    Ciphertext encrypt_R_result = get_encrypt_probe(ckks_encoder,encryptor, vector_R_result);
 
     Ciphertext encrypt_R_sum_cache;
 
