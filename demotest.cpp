@@ -115,6 +115,7 @@ vector<vector<double>> get_database(size_t slot_count) {
     cout << "------get_database() end------" << endl;
     return E_matrix;
 }
+
 /*
 * ejcrypt get probe_p;
 */
@@ -178,7 +179,7 @@ vector<Ciphertext> get_sub_square(CKKSEncoder& ckks_encoder,Evaluator & evaluato
         vector<double>result_sub_cache, result_mult_cache;
 
         evaluator.sub(probe_p, (*it), encrypt_sub_cache);
-        evaluator.relinearize_inplace(encrypt_sub_cache, relin_keys);
+        //evaluator.relinearize_inplace(encrypt_sub_cache, relin_keys);
         /*
         *  output test begin
         */
@@ -208,14 +209,16 @@ vector<Ciphertext> get_sub_square(CKKSEncoder& ckks_encoder,Evaluator & evaluato
         /*
         *  output test begin
         */
-        
+        /*
         decryptor.decrypt(encrypt_multiply_cache, plain_mult_cache);
         ckks_encoder.decode(plain_mult_cache, result_mult_cache);
 
-        /*
-        cout << "mult: " << endl;
-         //print_vector(result_mult_cache,5,13);
         
+        cout << "mult: " << endl;
+         print_vector(result_mult_cache,5,13);
+         */
+
+        /*
         double sum = 0;
         std::cout << std::fixed << std::setprecision(13); // 设置输出保留位数
         for (int i = 0; i < 10; i++)
@@ -287,7 +290,7 @@ vector<Ciphertext> get_sum_rotate(SEALContext &context,CKKSEncoder& ckks_encoder
             encrypt_sum_cache = encrypt_rotated_cache;
 
             evaluator.add_inplace(encrypt_sum_cache,(*it) );
-            evaluator.relinearize_inplace(encrypt_sum_cache, relin_keys);
+            //evaluator.relinearize_inplace(encrypt_sum_cache, relin_keys);
             /*
             decryptor.decrypt(encrypt_rotated_cache, plain_rotated_cache);
             ckks_encoder.decode(plain_rotated_cache, result_rotated_cache);
@@ -306,7 +309,7 @@ vector<Ciphertext> get_sum_rotate(SEALContext &context,CKKSEncoder& ckks_encoder
             /*
             decryptor.decrypt(encrypt_sum_cache, plain_sum_cache);
             ckks_encoder.decode(plain_sum_cache, result_sum_cache);
-
+            
             cout << "rotated 1 & add : " << endl;
             print_vector(result_sum_cache, 5, 13);
             */
@@ -323,6 +326,7 @@ vector<Ciphertext> get_sum_rotate(SEALContext &context,CKKSEncoder& ckks_encoder
         //cout << "    + Scale of encrypt_sum_cache before rescale: " << log2(encrypt_sum_cache.scale()) << endl;
         //cout << "    + Scale of encrypt_vector_k before rescale: " << log2(encrypt_vector_k.scale()) << endl;
         evaluator.multiply_inplace(encrypt_sum_cache, encrypt_vector_k);
+        evaluator.relinearize_inplace(encrypt_sum_cache, relin_keys);
         evaluator.rescale_to_next_inplace(encrypt_sum_cache);
         //cout << "    + Scale of encrypt_sum_cache after rescale: " << log2(encrypt_sum_cache.scale()) << endl;
         
@@ -381,30 +385,40 @@ vector<Ciphertext> get_dist(SEALContext& context,CKKSEncoder& ckks_encoder, Eval
 * shifting the ri vectors
 * Through shifting the rivectors, a structure conceptually akin to a diagonal matrix is reached,
 */
-vector<Ciphertext> get_shifting_ri(CKKSEncoder& ckks_encoder,Evaluator& evaluator,vector<Ciphertext> encrypt_R_matrix, GaloisKeys& galois_keys, Decryptor& decryptor) {
+vector<Ciphertext> get_shifting_ri(SEALContext& context,CKKSEncoder& ckks_encoder,Evaluator& evaluator,vector<Ciphertext> encrypt_R_matrix, GaloisKeys& galois_keys, Decryptor& decryptor) {
     print_line(__LINE__);
     cout << "------get_shifting_ri() begin------" << endl;
 
     vector<Ciphertext> encrypt_RR_matrix;
     Plaintext plain_shift_cache;
     vector<double>result_shift_cache;
-
+    
     int step = 0;
     for (auto it = encrypt_R_matrix.begin(); it != encrypt_R_matrix.end(); it++) {
-        Ciphertext after_shift = (*it);
-        if (step == 0)
-            continue;
+        Ciphertext after_shift;
         // 右移
-        evaluator.rotate_vector((*it),step, galois_keys,after_shift);
-        encrypt_RR_matrix.push_back(after_shift);
-        step--; 
 
-        /*
+        evaluator.rotate_vector((*it),step, galois_keys,after_shift);
+
+        
+        // reslut output test
         decryptor.decrypt(after_shift, plain_shift_cache);
+        result_shift_cache.clear();
         ckks_encoder.decode(plain_shift_cache, result_shift_cache);
-        cout << "rotated step: "<<step-1 << endl;
-        print_vector(result_shift_cache, 5, 13);
-        */
+
+        //cout << "rotated step: "<<step << endl;
+        
+        std::cout << std::fixed << std::setprecision(13); // 设置输出保留位数
+        for (auto i = 0; i < 10; i++)
+        {
+            cout << result_shift_cache[i] << " ";
+        }
+        cout << endl;
+        //print_vector(result_shift_cache, 5, 13);
+        
+        step--;
+        encrypt_RR_matrix.push_back(after_shift);
+        
     }
     print_line(__LINE__);
     cout << "------get_shifting_ri() end------" << endl;
@@ -416,26 +430,90 @@ vector<Ciphertext> get_shifting_ri(CKKSEncoder& ckks_encoder,Evaluator& evaluato
 *  thereby producing a single encrypted vector holding the comparison scores of p against E,
 *  i.e. a mapping was introduced so that R →(r1,1, r2,1, . . . rN,1).
 */
-Ciphertext get_combined_R(CKKSEncoder& ckks_encoder,Evaluator& evaluator, vector<Ciphertext> encrypt_R_matrix, Encryptor& encryptor, Decryptor& decryptor, RelinKeys& relin_keys) {
+Ciphertext get_combined_R(SEALContext& context,CKKSEncoder& ckks_encoder,Evaluator& evaluator, vector<Ciphertext> encrypt_R_matrix, Encryptor& encryptor, Decryptor& decryptor, RelinKeys& relin_keys) {
     print_line(__LINE__);
     cout << "------get_combined_R() begin------" << endl;
 
     vector<double>vector_R_result(ckks_encoder.slot_count(), 0ULL);
 
     Ciphertext encrypt_R_result = get_encrypt_probe(ckks_encoder,encryptor, vector_R_result);
-    
+
+    Ciphertext encrypt_R_sum_cache;
+
     cout << " combined together: " << endl;
-    
+    int step = 0;
     for (auto it = encrypt_R_matrix.begin(); it != encrypt_R_matrix.end(); it++) {
+        
+        if (step == 0)
+        {
+            encrypt_R_sum_cache = (*it);
+            step++;
+            continue;
+        }
+        else {
+            parms_id_type last_parms_id = (*it).parms_id();
+            
+            //encrypt_R_sum_cache.scale() = pow(2.0, 40);
+            //(*it).scale() = pow(2.0, 40);
+
+            //evaluator.transform_from_ntt_inplace(encrypt_R_sum_cache);
+            //evaluator.rescale_to_next_inplace(encrypt_R_sum_cache);
+            //evaluator.mod_switch_to_inplace(encrypt_R_sum_cache,last_parms_id);
+
+            //evaluator.relinearize_inplace(encrypt_R_sum_cache, relin_keys);
+            //cout << "    + Exact scale in  (*it): " << log2((*it).scale()) << endl;
+            //cout << "    + Exact scale in      1: " << log2(encrypt_R_sum_cache.scale()) << endl;
+            /*
+            cout << "    + Modulus chain index for it: "
+                << context.get_context_data((*it).parms_id())->chain_index() << endl;
+            cout << "    + Modulus chain index for it: "
+                << context.get_context_data(encrypt_R_sum_cache.parms_id())->chain_index() << endl;
+            
+            cout << "    + is_ntt_form() for *it: " << (*it).is_ntt_form() << endl;
+            cout << "    + is_ntt_form() for encrypt_R_sum_cache: " << (encrypt_R_sum_cache).is_ntt_form() << endl;
+            */
+            evaluator.add_inplace(encrypt_R_sum_cache, (*it));
+            evaluator.relinearize_inplace(encrypt_R_sum_cache,relin_keys);
+            step++;
+            /*
+            Plaintext plain_add_cache;
+            vector<double>result_add_cache;
+            decryptor.decrypt(encrypt_R_sum_cache, plain_add_cache);
+            ckks_encoder.decode(plain_add_cache, result_add_cache);
+            print_line(__LINE__);
+            cout << " mapping of R result " << endl;
+            print_vector(result_add_cache, 5, 13);
+            */
+        }
+        
+        // 将(*it) 的scale设置成和encrypt_R_result 中一致
+        //(*it).scale() = pow(2.0, 40);
+        /*
         cout << "    + Exact scale in  (*it): " << log2((*it).scale()) << endl;
         cout << "    + Exact scale in      1: " << log2(encrypt_R_result.scale()) << endl;
+        
+        */
+        // 将 encrypt_R_result 的 parms_id 与(*it)的parms_id保持一致
+       // parms_id_type last_parms_id = (*it).parms_id();
+        //evaluator.mod_switch_to_inplace(encrypt_R_result, last_parms_id);
+        
+        /*
+        cout << "    + Modulus chain index for it: "
+            << context.get_context_data((*it).parms_id())->chain_index() << endl;
+        cout << "    + Modulus chain index for it: "
+            << context.get_context_data(encrypt_R_result.parms_id())->chain_index() << endl;
+        */
+        /*
         evaluator.add_inplace(encrypt_R_result,(*it));
-        evaluator.relinearize_inplace(encrypt_R_result,relin_keys);
+        //evaluator.relinearize_inplace(encrypt_R_result,relin_keys);
+        evaluator.rescale_to_next_inplace(encrypt_R_result);
+        */
+       
     }
 
     print_line(__LINE__);
     cout << "------get_combined_R() end------" << endl;
-    return encrypt_R_result;
+    return encrypt_R_sum_cache;
 }
 
 void test1() {
@@ -443,7 +521,7 @@ void test1() {
     EncryptionParameters parms(scheme_type::ckks);
     size_t poly_modulus_degree = 8192;
     parms.set_poly_modulus_degree(poly_modulus_degree);
-    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 60, 40,40, 60 }));
+    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 50,30,30,30,60 }));
 
 
     SEALContext context(parms);
@@ -506,8 +584,21 @@ void test1() {
     /*
     * 加密获得probe_p;
     */
-    Ciphertext probe_p = get_encrypt_probe(ckks_encoder, encryptor, v_input);
-   
+    Ciphertext encrypt_probe_p = get_encrypt_probe(ckks_encoder, encryptor, v_input);
+    
+    /*
+    * 解密probe_p测试:
+    */
+    print_line(__LINE__);
+    cout << "decode decrypt probe_p test begin:------" << endl;
+    Plaintext plain_probe_p;
+    decryptor.decrypt(encrypt_probe_p, plain_probe_p);
+    vector<double>result_probe_p;
+    ckks_encoder.decode(plain_probe_p, result_probe_p);
+    print_vector(result_probe_p,5,13);
+    print_line(__LINE__);
+    cout << "decode decrypt probe_p test end:------"<<endl;
+
     /*
     * 加密 获得 enceypt_E_matrix
     */ 
@@ -518,32 +609,34 @@ void test1() {
     */
     print_line(__LINE__);
     int ci = 0;
-    cout << "encode encrtpy and decrypt deocde test : " << endl;
+    cout << "encode encrypt and decrypt deocde test begin: " << endl;
     for (auto it = encrypt_E_matrix.begin(); it != encrypt_E_matrix.end(); it++) {
         Plaintext plain_E_ci;
         Ciphertext encrypt_E_ci;
         decryptor.decrypt((*it),plain_E_ci);
-        vector<double>result;
-        ckks_encoder.decode(plain_E_ci,result);
-        print_vector(result, 5, 13);
+        vector<double>result_E_ci;
+        ckks_encoder.decode(plain_E_ci,result_E_ci);
+        print_vector(result_E_ci, 5, 13);
         ci++;
         if (ci > 3)
             break;
     }
-    
+    print_line(__LINE__);
+    cout << "encode encrypt and decrypt deocde test end: " << endl;
     /*
     * Sum of (Ci - Pi)^2
     * Core
     */
     print_line(__LINE__);
     cout << "Sum : " << endl;
-    vector<Ciphertext>encrypt_R_matrix = get_dist(context,ckks_encoder,evaluator,encrypt_E_matrix,probe_p,encryptor,decryptor,relin_keys,galois_keys);
+    vector<Ciphertext>encrypt_R_matrix = get_dist(context,ckks_encoder,evaluator,encrypt_E_matrix,encrypt_probe_p,encryptor,decryptor,relin_keys,galois_keys);
     
+
     // shifting R of ri
-    encrypt_R_matrix = get_shifting_ri( ckks_encoder,evaluator, encrypt_R_matrix, galois_keys,decryptor);
+    encrypt_R_matrix = get_shifting_ri( context,ckks_encoder,evaluator, encrypt_R_matrix, galois_keys,decryptor);
 
     // combined by adding them together
-    Ciphertext mapping_R = get_combined_R(ckks_encoder,evaluator, encrypt_R_matrix,encryptor,decryptor,relin_keys);
+    Ciphertext mapping_R = get_combined_R(context,ckks_encoder,evaluator, encrypt_R_matrix,encryptor,decryptor,relin_keys);
 
     Plaintext plain_add_cache;
     vector<double>result_add_cache;
@@ -551,8 +644,18 @@ void test1() {
     ckks_encoder.decode(plain_add_cache, result_add_cache);
     print_line(__LINE__);
     cout << " mapping of R result " << endl;
-    print_vector(result_add_cache, 5, 13);
+    std::cout << std::fixed << std::setprecision(13); // 设置输出保留位数
+    for (auto i = 0; i < 10; i++)
+    {
+        cout << result_add_cache[i] << " ";
+    }
+    cout << endl;
+    //print_vector(result_add_cache, 5, 13);
     
+    /*
+    * 后续判断操作
+    * 
+    */
     /*
     Ciphertext encrypt_T,encrypt_d;
     evaluator.sub(mapping_R,encrypt_T,encrypt_d);

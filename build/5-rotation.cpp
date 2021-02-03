@@ -160,8 +160,8 @@ void example_rotation_ckks() {
 
     Ciphertext rotated;
     print_line(__LINE__);
-    cout << "Rotate 2 steps left." << endl;
-    evaluator.rotate_vector(encrypted, 2, galois_keys, rotated);
+    cout << "Rotate 0 steps left." << endl;
+    evaluator.rotate_vector(encrypted, 0, galois_keys, rotated);
     cout << "    + Decrypt and decode ...... Correct." << endl;
     decryptor.decrypt(rotated, plain);
     vector<double> result;
