@@ -1,7 +1,7 @@
 # SEALExamples
 Microsoft SEAL学习
 
-[TOC]
+@[TOC]
 
 
 
