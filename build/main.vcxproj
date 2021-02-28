@@ -22,31 +22,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B094DA8F-FFEF-30C5-87AE-B44B1AA781F7}</ProjectGuid>
+    <ProjectGuid>{16330FFE-4050-3135-A020-D5F6EF723513}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
-    <ProjectName>ALL_BUILD</ProjectName>
+    <ProjectName>main</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
@@ -59,50 +59,205 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Software Engineering\Code\SEAL Study\Sealtest\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Software Engineering\Code\SEAL Study\Sealtest\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">main.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">main</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Software Engineering\Code\SEAL Study\Sealtest\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">main.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">main</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Software Engineering\Code\SEAL Study\Sealtest\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">main.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">main</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files (x86)\SEAL\lib\seal-3.6.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451d.lib;tensorflow_cc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Q:/fast_software/MicrosoftSEAL/tensorflow/lib;Q:/fast_software/MicrosoftSEAL/tensorflow/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Software Engineering/Code/SEAL Study/Sealtest/build/Debug/main.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Software Engineering/Code/SEAL Study/Sealtest/build/Debug/main.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files (x86)\SEAL\lib\seal-3.6.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;tensorflow_cc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Q:/fast_software/MicrosoftSEAL/tensorflow/lib;Q:/fast_software/MicrosoftSEAL/tensorflow/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Software Engineering/Code/SEAL Study/Sealtest/build/Release/main.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Software Engineering/Code/SEAL Study/Sealtest/build/Release/main.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files (x86)\SEAL\lib\seal-3.6.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;tensorflow_cc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Q:/fast_software/MicrosoftSEAL/tensorflow/lib;Q:/fast_software/MicrosoftSEAL/tensorflow/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Software Engineering/Code/SEAL Study/Sealtest/build/MinSizeRel/main.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Software Engineering/Code/SEAL Study/Sealtest/build/MinSizeRel/main.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Q:\fast_software\MicrosoftSEAL\tensorflow\include;Q:\fast_software\MicrosoftSEAL\opencv\build\include;C:\Program Files (x86)\SEAL\include\SEAL-3.6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files (x86)\SEAL\lib\seal-3.6.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;Q:\fast_software\MicrosoftSEAL\opencv\build\x64\vc15\lib\opencv_world451.lib;tensorflow_cc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Q:/fast_software/MicrosoftSEAL/tensorflow/lib;Q:/fast_software/MicrosoftSEAL/tensorflow/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Software Engineering/Code/SEAL Study/Sealtest/build/RelWithDebInfo/main.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Software Engineering/Code/SEAL Study/Sealtest/build/RelWithDebInfo/main.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\CmakeLists.txt">
@@ -162,6 +317,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\demotest.cpp" />
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\sealtest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="E:\Software Engineering\Code\SEAL Study\Sealtest\build\ZERO_CHECK.vcxproj">
@@ -169,10 +326,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
-    <ProjectReference Include="E:\Software Engineering\Code\SEAL Study\Sealtest\build\main.vcxproj">
-      <Project>{16330FFE-4050-3135-A020-D5F6EF723513}</Project>
-      <Name>main</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

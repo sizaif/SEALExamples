@@ -1,8 +1,8 @@
-# Install script for directory: E:/Software Engineering/Code/SEAL Study/Sealtest
+# Install script for directory: E:/Software Engineering/Code/SEAL Study/Sealtest/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/SEALExamples")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/SEALExamples")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

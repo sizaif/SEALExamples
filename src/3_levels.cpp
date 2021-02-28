@@ -104,7 +104,7 @@ void example_levels() {
         */
         context_data = context_data->next_context_data();
     }
-    cout << " End of chain reached" << endl << endl;
+    cout << " End of chain reached" << endl;
 
     //我们创建一些keys并检查它们是否确实出现在最高层。
     KeyGenerator keygen(context);

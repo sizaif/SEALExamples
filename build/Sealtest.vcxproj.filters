@@ -1,35 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\sealtest.cpp">
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\sealtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\1_bfv_Basics.cpp">
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\1_bfv_Basics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\2_encoder.cpp">
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\2_encoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\3_levels.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\demotest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="4_ckks_basics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="5-rotation.cpp">
+    <ClCompile Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\demotest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="E:\Software Engineering\Code\SEAL Study\Sealtest\examples.h">
+    <ClInclude Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\examples.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="E:\Software Engineering\Code\SEAL Study\Sealtest\CMakeLists.txt" />
+    <CustomBuild Include="E:\Software Engineering\Code\SEAL Study\Sealtest\src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
